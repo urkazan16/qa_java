@@ -1,17 +1,16 @@
-import org.junit.Rule;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import ru.yandex.praktikum.Animal;
 import ru.yandex.praktikum.constants.TextAnimal;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
+@RunWith(MockitoJUnitRunner.class)
 public class TestAnimal {
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
+
     @Mock
     private Animal animal;
 
@@ -20,7 +19,7 @@ public class TestAnimal {
         Animal animal = new Animal();
         String familyText = animal.getFamily();
         String expectedFamilyText = TextAnimal.FAMILY_TEXT;
-        assertEquals(expectedFamilyText, familyText);
+        Assert.assertEquals(expectedFamilyText, familyText);
     }
 
     @Test
@@ -28,7 +27,7 @@ public class TestAnimal {
         Animal animal = new Animal();
         List<String> actualAnimal = animal.getFood(TextAnimal.ANIMAL_HERBIVORE);
         List<String> expectedAnimal = TextAnimal.LIST_HERBIVORES;
-        assertEquals(expectedAnimal, actualAnimal);
+        Assert.assertEquals(expectedAnimal, actualAnimal);
     }
 
     @Test
@@ -36,14 +35,17 @@ public class TestAnimal {
         Animal animal = new Animal();
         List<String> actualAnimal = animal.getFood(TextAnimal.ANIMAL_PREDATOR);
         List<String> expectedAnimal = TextAnimal.LIST_PREDATOR;
-        assertEquals(expectedAnimal, actualAnimal);
+        Assert.assertEquals(expectedAnimal, actualAnimal);
     }
 
     @Test
-    public void checkGetFoodOmnivores() throws Exception {
-        exceptionRule.expect(Exception.class);
-        exceptionRule.expectMessage(TextAnimal.ANIMAL_TEXT_EXPECT_MESSAGE);
-        Animal animal = new Animal();
-        animal.getFood(TextAnimal.ANIMAL_OMNIVORES);
+    public void checkGetFoodOmnivores() {
+        try {
+            Animal animal = new Animal();
+            animal.getFood(TextAnimal.ANIMAL_OMNIVORES);
+            Assert.fail(TextAnimal.TEXT_EXPECTED);
+        } catch (Exception ex) {
+            Assert.assertEquals(TextAnimal.ANIMAL_TEXT_EXPECT_MESSAGE, ex.getMessage());
+        }
     }
 }

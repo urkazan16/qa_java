@@ -11,5 +11,6 @@ public class TextAnimal {
     public static final List LIST_PREDATOR = Arrays.asList("Животные", "Птицы", "Рыба");
     public static final List LIST_HERBIVORES = Arrays.asList("Трава", "Различные растения");
     public static final String ANIMAL_TEXT_EXPECT_MESSAGE = "Неизвестный вид животного, используйте значение Травоядное или Хищник";
-    public static final String LION_TEXT_EXPECT_MESSAGE = "Используйте допустимые значения пола животного - самей или самка";
+    public static final String LION_TEXT_EXPECT_MESSAGE = "Используйте допустимые значения пола животного - самец или самка";
+    public static final String TEXT_EXPECTED = "Expected Exception";
 }
